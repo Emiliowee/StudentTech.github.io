@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test - Student Tech</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <img src="assets/logo.png" alt="Logo Student Tech" class="logo">
+            <h1>Student Tech</h1>
+        </div>
+        <nav>
+            <a href="index.html">Inicio</a>
+            <a href="recomendaciones.html">Recomendaciones</a>
+            <a href="test.html">Test</a>
+            <a href="equipo.html">Equipo</a>
+            <button id="toggle-mode" aria-label="Cambiar modo">🌙</button>
+        </nav>
+    </header>
+
+    <main>
+        <section class="test-container">
+            <h2>Test de Recomendación</h2>
+            <p>Próximamente: Test para encontrar tu laptop ideal</p>
+        </section>
+    </main>
+
+    <!-- Pantalla de carga -->
+    <div class="loading-screen" id="loading-screen">
+        <div class="loading-content">
+            <img src="assets/crocodile-happy.gif" alt="Cocodrilo feliz" class="loading-gif">
+            <div class="loading-bar">
+                <div class="loading-progress"></div>
+            </div>
+            <p class="loading-text">Analizando tus necesidades...</p>
+        </div>
+    </div>
+
+    <script>
+        // Alternar modo claro/oscuro
+        const btn = document.getElementById('toggle-mode');
+        
+        // Cargar el modo guardado
+        const savedMode = localStorage.getItem('darkMode');
+        if (savedMode === 'false') {
+            document.body.classList.add('light-mode');
+            btn.textContent = '☀️';
+        }
+
+        btn.addEventListener('click', () => {
+            document.body.classList.toggle('light-mode');
+            const isLightMode = document.body.classList.contains('light-mode');
+            btn.textContent = isLightMode ? '☀️' : '🌙';
+            localStorage.setItem('darkMode', !isLightMode);
+        });
+
+        // Función para mostrar la pantalla de carga
+        function showLoadingScreen() {
+            const loadingScreen = document.getElementById('loading-screen');
+            const loadingProgress = document.querySelector('.loading-progress');
+            
+            loadingScreen.classList.add('active');
+            
+            let progress = 0;
+            const interval = setInterval(() => {
+                progress += 2;
+                loadingProgress.style.width = `${progress}%`;
+                
+                if (progress >= 100) {
+                    clearInterval(interval);
+                    setTimeout(() => {
+                        window.location.href = 'test.html';
+                    }, 200);
+                }
+            }, 40);
+        }
+
+        // Manejo de la pantalla de carga para el enlace del header
+        const headerTestLink = document.querySelector('nav a[href="test.html"]');
+        headerTestLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            showLoadingScreen();
+        });
+    </script>
+</body>
+</html> 

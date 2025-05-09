@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Equipo - Student Tech</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <img src="assets/logo.png" alt="Logo Student Tech" class="logo">
+            <h1>Student Tech</h1>
+        </div>
+        <nav>
+            <a href="index.html">Inicio</a>
+            <a href="recomendaciones.html">Recomendaciones</a>
+            <a href="test.html">Test</a>
+            <a href="equipo.html">Equipo</a>
+            <button id="toggle-mode" aria-label="Cambiar modo">🌙</button>
+        </nav>
+    </header>
+
+    <main>
+        <section class="equipo-container">
+            <h2>Nuestro Equipo</h2>
+            <p>Conoce al Equipo de Programadores:</p>
+            
+            <div class="team-members">
+                <div class="team-member">
+                    <img src="assets/personajes1.jpeg" alt="Miembro del equipo 1" class="member-image">
+                    <p>Leyva Osuna Jesús,  
+                          Magui López Neyoy :</p>
+                </div>
+                <div class="team-member large">
+                    <img src="assets/personajes2.jpeg" alt="Miembro del equipo 2" class="member-image">
+                    <p>Morales Molina Damian,
+                            Pérez Ibarra Emilio,
+                         Valenzuela Morales Sergio,
+                         Celso Hebert:</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // Alternar modo claro/oscuro
+        const btn = document.getElementById('toggle-mode');
+        
+        // Cargar el modo guardado
+        const savedMode = localStorage.getItem('darkMode');
+        if (savedMode === 'false') {
+            document.body.classList.add('light-mode');
+            btn.textContent = '☀️';
+        }
+
+        btn.addEventListener('click', () => {
+            document.body.classList.toggle('light-mode');
+            const isLightMode = document.body.classList.contains('light-mode');
+            btn.textContent = isLightMode ? '☀️' : '🌙';
+            localStorage.setItem('darkMode', !isLightMode);
+        });
+    </script>
+</body>
+</html>

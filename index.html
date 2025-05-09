@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Tech</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <img src="assets/logo.png" alt="Logo Student Tech" class="logo">
+            <h1>Student Tech</h1>
+        </div>
+        <nav>
+            <a href="#">Inicio</a>
+            <a href="recomendaciones.html">Recomendaciones</a>
+            <a href="test.html">Test</a>
+            <a href="equipo.html">Equipo</a>
+            <button id="toggle-mode" aria-label="Cambiar modo">🌙</button>
+        </nav>
+    </header>
+
+    <main>
+        <section class="guia">
+            <div class="guia-content">
+                <h2>Guía de Laptops para Estudiantes de la UES Navojoa 2025</h2>
+                <div class="introduccion">
+                    <h3>Introducción</h3>
+                    <p>
+                        Esta pagina proporciona recomendaciones detalladas de laptops para estudiantes de la Universidad Estatal de Sonora (UES) en Navojoa, considerando las necesidades específicas de cada carrera: Software, Mecatrónica, Industrial en Manufactura, Biomédica, Contaduría, Comercio Internacional, Finanzas e Inversiones, Medicina General y Comunitaria, Criminología y Ecología. Las opciones se dividen en tres rangos de precio: baratas (5000-7000 MXN), medio (8000-12000 MXN) y alto (más de 12000 MXN), con 3-5 opciones por rango para cada carrera. Los precios son estimaciones para mayo de 2025, basadas en tendencias del mercado mexicano, y se recomienda verificar en tiendas como Amazon México, Mercado Libre, Walmart México o Office Depot México.
+                    </p>
+                </div>
+            </div>
+            <div class="guia-image">
+                <img src="assets/laptop-2620118_1280.jpg" alt="Laptop moderna para estudiantes">
+            </div>
+        </section>
+
+        <section class="hero">
+            <h2>Encuentra la laptop perfecta para tu vida universitaria</h2>
+            <p>Recomendaciones personalizadas según tu carrera, presupuesto y necesidades técnicas.</p>
+            <a href="#" class="cta-btn" id="start-test">¡Haz el test y descubre tu laptop ideal!</a>
+        </section>
+
+        <!-- Pantalla de carga -->
+        <div class="loading-screen" id="loading-screen">
+            <div class="loading-content">
+                <img src="assets/crocodile-happy.gif" alt="Cocodrilo feliz" class="loading-gif">
+                <div class="loading-bar">
+                    <div class="loading-progress"></div>
+                </div>
+                <p class="loading-text">Analizando tus necesidades...</p>
+            </div>
+        </div>
+
+    </main>
+    <script>
+        // Alternar modo claro/oscuro
+        const btn = document.getElementById('toggle-mode');
+        
+        // Cargar el modo guardado
+        const savedMode = localStorage.getItem('darkMode');
+        if (savedMode === 'false') {
+            document.body.classList.add('light-mode');
+            btn.textContent = '☀️';
+        }
+
+        btn.addEventListener('click', () => {
+            document.body.classList.toggle('light-mode');
+            const isLightMode = document.body.classList.contains('light-mode');
+            btn.textContent = isLightMode ? '☀️' : '🌙';
+            localStorage.setItem('darkMode', !isLightMode);
+        });
+
+        // Función para mostrar la pantalla de carga
+        function showLoadingScreen() {
+            const loadingScreen = document.getElementById('loading-screen');
+            const loadingProgress = document.querySelector('.loading-progress');
+            
+            loadingScreen.classList.add('active');
+            
+            let progress = 0;
+            const interval = setInterval(() => {
+                progress += 2; // Incrementamos más rápido para completar en 2 segundos
+                loadingProgress.style.width = `${progress}%`;
+                
+                if (progress >= 100) {
+                    clearInterval(interval);
+                    setTimeout(() => {
+                        window.location.href = 'test.html';
+                    }, 200);
+                }
+            }, 40); // Actualizamos cada 40ms para una animación más suave
+        }
+
+        // Manejo de la pantalla de carga para el botón CTA
+        const startTestBtn = document.getElementById('start-test');
+        startTestBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            showLoadingScreen();
+        });
+
+        // Manejo de la pantalla de carga para el enlace del header
+        const headerTestLink = document.querySelector('nav a[href="test.html"]');
+        headerTestLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            showLoadingScreen();
+        });
+    </script>
+</body>
+</html>
